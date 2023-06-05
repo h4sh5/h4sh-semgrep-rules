@@ -1,0 +1,44 @@
+rules:
+
+- id: os_executions
+  patterns:
+    - pattern-either:
+      - pattern: os.system(...)
+      - pattern: os._execvpe(...)
+      - pattern: os._spawnvef(...)
+      - pattern: os.execl(...)
+      - pattern: os.execle(...)
+      - pattern: os.execlp(...)
+      - pattern: os.execlpe(...)
+      - pattern: os.execv(...)
+      - pattern: os.execve(...)
+      - pattern: os.execvp(...)
+      - pattern: os.execvpe(...)
+      - pattern: os.get_exec_path(...)
+      - pattern: os.posix_spawn(...)
+      - pattern: os.posix_spawnp(...)
+      - pattern: os.spawnl(...)
+      - pattern: os.spawnle(...)
+      - pattern: os.spawnlp(...)
+      - pattern: os.spawnlpe(...)
+      - pattern: os.spawnv(...)
+      - pattern: os.spawnve(...)
+      - pattern: os.spawnvp(...)
+      - pattern: os.spawnvpe(...)
+  message: os command execution, might be a backdoor
+  languages: [python]
+  severity: WARNING
+
+
+- id: subprocess_execs
+  patterns:
+    - pattern-either:
+      - pattern: subprocess.call(...)
+      - pattern: subprocess.check_call(...)
+      - pattern: subprocess.check_output(...)
+      - pattern: subprocess.getoutput(...)
+      - pattern: subprocess.getstatusoutput(...)
+      - pattern: subprocess.run(...)
+  message: subprocess execution, might be a backdoor
+  languages: [python]
+  severity: WARNING

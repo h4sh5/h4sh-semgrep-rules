@@ -1,0 +1,22 @@
+rules:
+- id: obfuscated-execution
+  mode: taint
+  pattern-sources:
+    - patterns:
+      - pattern-either:
+          - pattern: base64.b64decode(...)
+          - pattern: zlib.decompress(...)
+          - pattern: gzip.decompress(...)
+          - pattern: gzip.decompress(...)
+          - pattern: bytes.decode(...)
+  pattern-sinks:
+    - pattern-either:
+        - pattern-inside: eval(...)
+        - pattern-inside: exec(...)
+        - pattern-inside: os.system(...)
+        - pattern-inside: subprocess.check_output(...)
+        - pattern-inside: subprocess.run(...)
+  message: Execution of deobfuscated data
+  languages:
+    - python
+  severity: ERROR

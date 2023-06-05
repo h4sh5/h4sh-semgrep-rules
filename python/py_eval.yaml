@@ -1,0 +1,11 @@
+rules:
+
+- id: python_eval_exec
+  patterns:
+    - pattern-either:
+      - pattern: eval(...)
+      - pattern: exec(...)
+  message: use of eval/exec to run python code directly, dangerous
+  languages: [python]
+  severity: WARNING
+
