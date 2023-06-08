@@ -9,6 +9,8 @@ rules:
           - pattern: gzip.decompress(...)
           - pattern: gzip.decompress(...)
           - pattern: bytes.decode(...)
+          - pattern: marshal.loads(...)
+          - pattern: marshal.load(...)
   pattern-sinks:
     - pattern-either:
         - pattern-inside: eval(...)
